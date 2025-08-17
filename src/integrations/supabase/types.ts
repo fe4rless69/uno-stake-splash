@@ -14,7 +14,107 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      game_players: {
+        Row: {
+          cards: Json
+          game_room_id: string
+          id: string
+          is_ready: boolean
+          joined_at: string
+          position: number
+          user_id: string
+        }
+        Insert: {
+          cards?: Json
+          game_room_id: string
+          id?: string
+          is_ready?: boolean
+          joined_at?: string
+          position: number
+          user_id: string
+        }
+        Update: {
+          cards?: Json
+          game_room_id?: string
+          id?: string
+          is_ready?: boolean
+          joined_at?: string
+          position?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_players_game_room_id_fkey"
+            columns: ["game_room_id"]
+            isOneToOne: false
+            referencedRelation: "game_rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_rooms: {
+        Row: {
+          bet_amount: number
+          created_at: string
+          current_players: number
+          game_state: Json | null
+          host_id: string
+          id: string
+          max_players: number
+          name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          bet_amount?: number
+          created_at?: string
+          current_players?: number
+          game_state?: Json | null
+          host_id: string
+          id?: string
+          max_players?: number
+          name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          bet_amount?: number
+          created_at?: string
+          current_players?: number
+          game_state?: Json | null
+          host_id?: string
+          id?: string
+          max_players?: number
+          name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          balance: number
+          created_at: string
+          display_name: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          balance?: number
+          created_at?: string
+          display_name: string
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          balance?: number
+          created_at?: string
+          display_name?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
