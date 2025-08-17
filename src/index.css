@@ -8,35 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Casino Gaming Theme */
+    --background: 140 30% 8%;
+    --foreground: 60 30% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 140 25% 12%;
+    --card-foreground: 60 30% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 140 25% 12%;
+    --popover-foreground: 60 30% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 45 90% 55%;
+    --primary-foreground: 140 30% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 140 20% 18%;
+    --secondary-foreground: 60 30% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 140 15% 15%;
+    --muted-foreground: 60 15% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 200 95% 55%;
+    --accent-foreground: 140 30% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 60 30% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 140 15% 20%;
+    --input: 140 15% 15%;
+    --ring: 45 90% 55%;
 
-    --radius: 0.5rem;
+    /* Gaming specific colors */
+    --casino-green: 140 50% 25%;
+    --casino-felt: 140 40% 15%;
+    --gold: 45 90% 55%;
+    --gold-light: 45 85% 65%;
+    --silver: 210 15% 75%;
+    --win-green: 120 60% 50%;
+    --lose-red: 0 70% 55%;
+    
+    /* Card colors */
+    --card-red: 0 85% 55%;
+    --card-yellow: 50 90% 55%;
+    --card-green: 120 60% 45%;
+    --card-blue: 220 85% 55%;
+    --card-wild: 285 85% 55%;
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +118,133 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: radial-gradient(ellipse at center, hsl(var(--casino-green)), hsl(var(--background)));
+  }
+}
+
+@layer components {
+  /* Card Animations */
+  .card-flip {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+  
+  .card-flip.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .card-deal {
+    animation: card-deal 0.8s ease-out;
+  }
+  
+  .card-play {
+    animation: card-play 0.5s ease-out;
+  }
+  
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Gaming Effects */
+  .chip-glow {
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.6);
+    animation: chip-pulse 2s infinite;
+  }
+  
+  .win-celebration {
+    animation: win-bounce 0.6s ease-out, win-glow 2s ease-out;
+  }
+  
+  .table-felt {
+    background: radial-gradient(ellipse at center, 
+      hsl(var(--casino-felt)), 
+      hsl(var(--casino-green)));
+    border: 8px solid hsl(var(--gold));
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Particle Effects */
+  .confetti {
+    animation: confetti-fall 3s ease-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .border-gradient-gold {
+    border: 2px solid transparent;
+    background: linear-gradient(hsl(var(--casino-felt)), hsl(var(--casino-felt))) padding-box,
+                linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light))) border-box;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes card-deal {
+  0% {
+    transform: translateX(-200px) rotate(-20deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-50px) rotate(-5deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes card-play {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes chip-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(var(--gold) / 0.9);
+  }
+}
+
+@keyframes win-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes win-glow {
+  0% { box-shadow: 0 0 0 hsl(var(--win-green) / 0); }
+  50% { box-shadow: 0 0 40px hsl(var(--win-green) / 0.8); }
+  100% { box-shadow: 0 0 0 hsl(var(--win-green) / 0); }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
   }
 }

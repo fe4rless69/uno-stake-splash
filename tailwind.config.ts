@@ -52,6 +52,25 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Gaming-specific colors
+				casino: {
+					green: 'hsl(var(--casino-green))',
+					felt: 'hsl(var(--casino-felt))'
+				},
+				gold: {
+					DEFAULT: 'hsl(var(--gold))',
+					light: 'hsl(var(--gold-light))'
+				},
+				silver: 'hsl(var(--silver))',
+				win: 'hsl(var(--win-green))',
+				lose: 'hsl(var(--lose-red))',
+				unoCard: {
+					red: 'hsl(var(--card-red))',
+					yellow: 'hsl(var(--card-yellow))',
+					green: 'hsl(var(--card-green))',
+					blue: 'hsl(var(--card-blue))',
+					wild: 'hsl(var(--card-wild))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
